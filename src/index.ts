@@ -43,6 +43,9 @@ export class WetLayer {
             if (request && request.action === "WetApplyLanguage")
                 this.applyLanguage(request.language);
         });
+    }
+
+    public loadFromStorage() {
         browser.storage.local.get(["wet-locale", "wet-map"]).then((data) => {
             this.locale = data["wet-locale"] || "";
             this.map = data["wet-map"] || {};

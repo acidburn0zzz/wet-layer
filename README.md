@@ -31,10 +31,16 @@ Use it like this in your extension:
 ```typescript
 import { wetLayer } from "wet-layer";
 
-// Use it in place of i18n.getMessage():
+// In the background script, call this at startup (once), so that the storage is cleared:
+wetLayer.reset();
+
+// In other scripts (content scripts), make sure to call this at startup (once), so that translations are loaded:
+wetLayer.loadFromStorage();
+
+// Then use it in place of i18n.getMessage():
 const message = wetLayer.getMessage("my_translation_key", ["foo", "bar"]);
 
-// Listen for updates:
+// Listen for updates.. this will also get called by loadFromStorage():
 wetLayer.addListener(() => console.log("Translations have been updated.. get your messages from wetLayer again!"));
 
 ```
